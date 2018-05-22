@@ -2,13 +2,16 @@ GEM
   remote: http://rubygems.org/
   specs:
     ast (2.4.0)
+    backports (3.11.3)
     diff-lcs (1.3)
     ffi (1.9.23)
     govuk-lint (3.8.0)
       rubocop (~> 0.52.0)
       rubocop-rspec (~> 1.19.0)
       scss_lint
+    multi_json (1.13.1)
     mustermann (1.0.2)
+    mysql2 (0.5.1)
     parallel (1.12.1)
     parser (2.5.1.0)
       ast (~> 2.4.0)
@@ -55,11 +58,19 @@ GEM
     scss_lint (0.57.0)
       rake (>= 0.9, < 13)
       sass (~> 3.5.5)
+    sequel (5.8.0)
     sinatra (2.0.1)
       mustermann (~> 1.0)
       rack (~> 2.0)
       rack-protection (= 2.0.1)
       tilt (~> 2.0)
+    sinatra-contrib (2.0.1)
+      backports (>= 2.0)
+      multi_json
+      mustermann (~> 1.0)
+      rack-protection (= 2.0.1)
+      sinatra (= 2.0.1)
+      tilt (>= 1.3, < 3)
     tilt (2.0.8)
     unicode-display_width (1.3.2)
 
@@ -68,10 +79,13 @@ PLATFORMS
 
 DEPENDENCIES
   govuk-lint
+  mysql2
   puma
   rack-test
   rspec
+  sequel (~> 5.3)
   sinatra
+  sinatra-contrib
 
 RUBY VERSION
    ruby 2.5.1p57
