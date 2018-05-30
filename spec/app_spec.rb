@@ -59,7 +59,7 @@ RSpec.describe App do
           get url
         end
 
-        it 'responds with password in the body', focus: true do
+        it 'responds with password in the body' do
           expect(last_response.body).to eq('{"control:Cleartext-Password":"FooBarBaz"}')
         end
       end
@@ -71,6 +71,22 @@ RSpec.describe App do
         it 'responds with an empty string' do
           expect(last_response.body).to eq('')
         end
+      end
+    end
+
+    context 'with multiple connections to mysql' do
+      let(:url) { "/authorize/user/#{username}" }
+
+      before do
+        db[:userdetails].insert(username: username, password: 'FooBarBaz')
+
+        200.times do
+          get url
+        end
+      end
+
+      it 'does not fall over' do
+        expect(last_response).to be_ok
       end
     end
   end
