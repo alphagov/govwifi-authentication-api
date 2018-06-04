@@ -12,5 +12,4 @@ RUN apk --update --upgrade add build-base mysql-dev && \
 
 COPY . .
 
-
-CMD ["bundle", "exec", "rackup", "-o", "0.0.0.0", "-p", "9080"]
+CMD ["bundle", "exec", "rackup", "-o", "0.0.0.0", "-p", "8080"]
