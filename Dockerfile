@@ -1,5 +1,6 @@
 FROM ruby:2.5-alpine
 ARG BUNDLE_INSTALL_CMD
+ENV RACK_ENV=development
 
 WORKDIR /usr/src/app
 
