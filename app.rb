@@ -3,6 +3,10 @@ require 'sinatra/base'
 require 'sinatra/json'
 
 class App < Sinatra::Base
+  configure :production, :staging, :development do
+    enable :logging
+  end
+
   DB = Sequel.connect(
     adapter: 'mysql2',
     host: ENV.fetch('DB_HOSTNAME'),
