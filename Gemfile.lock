@@ -63,7 +63,7 @@ GEM
       sass (~> 3.5.5)
     sentry-raven (2.7.3)
       faraday (>= 0.7.6, < 1.0)
-    sequel (5.8.0)
+    sequel (5.9.0)
     sinatra (2.0.1)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -89,7 +89,7 @@ DEPENDENCIES
   rack-test
   rspec
   sentry-raven
-  sequel (~> 5.3)
+  sequel (~> 5.9)
   sinatra
   sinatra-contrib
 
