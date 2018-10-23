@@ -13,6 +13,8 @@ build:
 
 serve:
 	$(MAKE) build
+	docker-compose up -d db
+	./mysql/bin/wait_for_mysql
 	docker-compose up -d
 
 lint:
@@ -21,7 +23,6 @@ lint:
 
 test:
 	$(MAKE) serve
-	./mysql/bin/wait_for_mysql
 	docker-compose run --rm app rspec
 	$(MAKE) stop
 
