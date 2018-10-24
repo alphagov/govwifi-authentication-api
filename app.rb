@@ -1,6 +1,8 @@
 require 'sequel'
 require 'sinatra/base'
 require 'sinatra/json'
+require 'logger'
+
 
 class App < Sinatra::Base
   configure do
