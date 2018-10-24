@@ -34,7 +34,7 @@ pipeline {
       }
 
       steps {
-        deploy('staging')
+        deploy_staging()
       }
     }
 
@@ -44,7 +44,7 @@ pipeline {
       }
 
       steps {
-        deploy('production')
+        deploy_production()
       }
     }
   }
@@ -63,6 +63,10 @@ pipeline {
     success {
       setBuildStatus("Build successful", "SUCCESS");
     }
+
+    cleanup {
+      sh 'make stop'
+    }
   }
 }
 
@@ -76,29 +80,21 @@ void setBuildStatus(String message, String state) {
   ]);
 }
 
-def deploy(deploy_environment) {
+def deploy_staging() {
+  deploy('staging')
+}
+
+def deploy_production() {
   if(deployCancelled()) {
     setBuildStatus("Build successful", "SUCCESS");
     return
   }
 
-  echo "${deploy_environment}"
   try {
     timeout(time: 5, unit: 'MINUTES') {
-      input "Do you want to deploy to ${deploy_environment}?"
-      // Jenkins does a fetch without tags during setup this means
-      // we need to run git fetch again here before we can checkout stable
-      sh('git fetch')
-      sh('git checkout stable')
+      input "Do you want to deploy to production?"
 
-      docker.withRegistry(env.AWS_ECS_API_REGISTRY) {
-        sh("eval \$(aws ecr get-login --no-include-email)")
-        def appImage = docker.build(
-          "govwifi/authorisation-api:${deploy_environment}",
-          "--build-arg BUNDLE_INSTALL_CMD='bundle install --without test' ."
-        )
-        appImage.push()
-      }
+      deploy('production')
     }
   } catch(err) { // timeout reached or input false
     def user = err.getCauses()[0].getUser()
@@ -110,6 +106,22 @@ def deploy(deploy_environment) {
       Globals.userInput = false
       echo "Aborted by: [${user}]"
     }
+  }
+}
+
+def deploy(deploy_environment) {
+  echo "${deploy_environment}"
+
+  sh('git fetch')
+  sh('git checkout stable')
+
+  docker.withRegistry(env.AWS_ECS_API_REGISTRY) {
+    sh("eval \$(aws ecr get-login --no-include-email)")
+    def appImage = docker.build(
+      "govwifi/authorisation-api:${deploy_environment}",
+      "--build-arg BUNDLE_INSTALL_CMD='bundle install --without test' ."
+    )
+    appImage.push()
   }
 }
 
