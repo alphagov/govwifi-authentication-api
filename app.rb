@@ -1,10 +1,16 @@
 require 'sequel'
 require 'sinatra/base'
 require 'sinatra/json'
+require 'logger'
+
 
 class App < Sinatra::Base
-  configure :production, :staging, :development do
+  configure do
     enable :logging
+    set :logging, Logger::DEBUG
+  end
+  configure :production do
+    set :logging, Logger::INFO
   end
 
   configure :production, :staging do
