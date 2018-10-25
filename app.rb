@@ -13,6 +13,10 @@ class App < Sinatra::Base
     set :logging, Logger::INFO
   end
 
+  configure :production, :staging do
+    set :dump_errors, false
+  end
+
   DB = Sequel.connect(
     adapter: 'mysql2',
     host: ENV.fetch('DB_HOSTNAME'),
