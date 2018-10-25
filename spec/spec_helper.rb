@@ -4,7 +4,7 @@ require 'simplecov'
 
 ENV['RACK_ENV'] = 'test'
 
-require File.expand_path '../../app.rb', __FILE__
+require File.expand_path '../app.rb', __dir__
 
 module RSpecMixin
   include Rack::Test::Methods
