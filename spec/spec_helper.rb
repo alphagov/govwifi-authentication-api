@@ -1,5 +1,6 @@
 require 'rack/test'
 require 'rspec'
+require 'simplecov'
 
 ENV['RACK_ENV'] = 'test'
 
@@ -9,5 +10,7 @@ module RSpecMixin
   include Rack::Test::Methods
   def app() described_class end
 end
+
+SimpleCov.start
 
 RSpec.configure { |c| c.include RSpecMixin }
