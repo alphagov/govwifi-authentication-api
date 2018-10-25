@@ -38,6 +38,7 @@ private
   def authorize_user(user_name)
     user = user_from_db(user_name)
     return 404 unless user
+
     json "control:Cleartext-Password": user[:password]
   end
 
