@@ -135,9 +135,7 @@ def deploy(deploy_environment) {
   }
 
   regions.each {
-    sh(
-      "aws ecs update-service --force-new-deployment --cluster ${cluster_name} --service ${service_name} --region ${it}"
-    )
+    sh("aws ecs update-service --force-new-deployment --cluster ${cluster_name} --service ${service_name} --region ${it}")
   }
 }
 
