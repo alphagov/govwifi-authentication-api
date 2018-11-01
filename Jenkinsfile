@@ -131,7 +131,7 @@ def deploy(deploy_environment) {
   } else {
     cluster_name = 'staging-api-cluster'
     service_name = 'authorisation-api-service-staging'
-    regions = ['eu-west-1']
+    regions = ['eu-west-2']
   }
 
   regions.each {
