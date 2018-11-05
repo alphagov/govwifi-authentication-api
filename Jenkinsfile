@@ -123,6 +123,20 @@ def deploy(deploy_environment) {
     )
     appImage.push()
   }
+
+  if(deploy_environment == 'production') {
+    cluster_name = 'wifi-api-cluster'
+    service_name = 'authorisation-api-service-wifi'
+    regions = ['eu-west-1', 'eu-west-2']
+  } else {
+    cluster_name = 'staging-api-cluster'
+    service_name = 'authorisation-api-service-staging'
+    regions = ['eu-west-2']
+  }
+
+  regions.each {
+    sh("aws ecs update-service --force-new-deployment --cluster ${cluster_name} --service ${service_name} --region ${it}")
+  }
 }
 
 def publishStableTag() {
