@@ -22,7 +22,7 @@ GEM
       ast (~> 2.4.0)
     powerpack (0.1.1)
     puma (3.11.4)
-    rack (2.0.5)
+    rack (2.0.6)
     rack-protection (2.0.2)
       rack
     rack-test (1.1.0)
