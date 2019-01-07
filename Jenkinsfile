@@ -110,24 +110,7 @@ def deploy_production() {
   if(deployCancelled()) {
     return
   }
-
-  try {
-    timeout(time: 5, unit: 'MINUTES') {
-      input "Do you want to deploy to production?"
-
-      deploy('production')
-    }
-  } catch(err) { // timeout reached or input false
-    def user = err.getCauses()[0].getUser()
-
-    if('SYSTEM' == user.toString()) { // SYSTEM means timeout.
-      Globals.didTimeout = true
-      echo "Release window timed out, to deploy please re-run"
-    } else {
-      Globals.userInput = false
-      echo "Aborted by: [${user}]"
-    }
-  }
+  deploy('production')
 }
 
 def deploy(deploy_environment) {
