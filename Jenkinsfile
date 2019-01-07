@@ -55,6 +55,18 @@ pipeline {
       }
     }
 
+    stage('Confirm deploy to production') {
+      agent none
+      when {
+        branch 'master'
+        beforeAgent true
+      }
+      steps {
+        wait_for_input('production')
+      }
+    }
+
+
     stage('Deploy to production') {
       agent any
       when {
@@ -65,6 +77,27 @@ pipeline {
       steps {
         deploy_production()
       }
+    }
+  }
+}
+
+def wait_for_input(deploy_environment) {
+  if (deployCancelled()) {
+    return;
+  }
+  try {
+    timeout(time: 5, unit: 'MINUTES') {
+      input "Do you want to deploy to ${deploy_environment}?"
+    }
+  } catch (err) {
+    def user = err.getCauses()[0].getUser()
+
+    if('SYSTEM' == user.toString()) { // SYSTEM means timeout.
+      Globals.didTimeout = true
+      echo "Release window timed out, to deploy please re-run"
+    } else {
+      Globals.userInput = false
+      echo "Aborted by: [${user}]"
     }
   }
 }
