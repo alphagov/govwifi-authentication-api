@@ -4,23 +4,38 @@ class Globals {
 }
 
 pipeline {
-  agent any
+  agent none
   stages {
     stage('Linting') {
+      agent any
       steps {
         sh 'make lint'
+      }
+      post {
+        always {
+          sh 'make stop'
+        }
       }
     }
 
     stage('Test') {
+      agent any
       steps {
         sh 'make test'
       }
+      post {
+        always {
+          sh 'make stop'
+        }
+      }
+
     }
 
     stage('Publish stable tag') {
-      when{
+      agent any
+      when {
         branch 'master'
+        beforeAgent true
       }
 
       steps {
@@ -29,8 +44,10 @@ pipeline {
     }
 
     stage('Deploy to staging') {
+      agent any
       when{
         branch 'master'
+        beforeAgent true
       }
 
       steps {
@@ -39,19 +56,15 @@ pipeline {
     }
 
     stage('Deploy to production') {
-      when{
+      agent any
+      when {
         branch 'master'
+        beforeAgent true
       }
 
       steps {
         deploy_production()
       }
-    }
-  }
-
-  post {
-    cleanup {
-      sh 'make stop'
     }
   }
 }
