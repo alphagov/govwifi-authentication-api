@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'sensible_logging'
 require 'sequel'
 require 'sinatra/base'
