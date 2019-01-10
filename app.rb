@@ -1,3 +1,4 @@
+require 'sensible_logging'
 require 'sequel'
 require 'sinatra/base'
 require 'sinatra/json'
@@ -5,12 +6,18 @@ require 'logger'
 
 
 class App < Sinatra::Base
+  register Sinatra::SensibleLogging
+
+  sensible_logging(
+    logger: Logger.new(STDOUT)
+  )
+
   configure do
-    enable :logging
-    set :logging, Logger::DEBUG
+    set :log_level, Logger::DEBUG
   end
+
   configure :production do
-    set :logging, Logger::INFO
+    set :log_level, Logger::INFO
   end
 
   configure :production, :staging do
