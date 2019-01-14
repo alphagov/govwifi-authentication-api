@@ -50,7 +50,6 @@ private
   end
 
   def user_from_db(user_name)
-    logger.info("we are executing a database query - #{Time.now.to_i}")
     DB[:userdetails].select(Sequel[:password]).first(username: user_name)
   end
 end
