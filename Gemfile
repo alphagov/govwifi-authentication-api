@@ -5,7 +5,7 @@ gem 'mysql2'
 gem 'puma'
 gem 'sensible_logging', '~> 0.4.0'
 gem 'sentry-raven'
-gem 'sequel', '~> 5.14'
+gem 'sequel', '~> 5.16'
 gem 'sinatra'
 gem 'sinatra-contrib'
 
