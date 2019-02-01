@@ -42,6 +42,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    require_all (2.0.0)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -111,6 +112,7 @@ DEPENDENCIES
   mysql2
   puma
   rack-test
+  require_all
   rspec
   sensible_logging (~> 0.4.0)
   sentry-raven

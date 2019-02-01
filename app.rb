@@ -1,9 +1,4 @@
-require 'sensible_logging'
-require 'sequel'
-require 'sinatra/base'
-require 'sinatra/json'
-require 'logger'
-
+require './lib/loader'
 
 class App < Sinatra::Base
   register Sinatra::SensibleLogging
