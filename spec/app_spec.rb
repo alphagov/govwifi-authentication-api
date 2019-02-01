@@ -1,15 +1,5 @@
-RSpec.describe App do
+describe App do
   describe 'visiting /authorize' do
-    let(:db) do
-      Sequel.connect(
-        adapter: 'mysql2',
-        host: ENV.fetch('DB_HOSTNAME'),
-        database: ENV.fetch('DB_NAME'),
-        user: ENV.fetch('DB_USER'),
-        password: ENV.fetch('DB_PASS')
-      )
-    end
-
     let(:username) { 'abcdef' }
     let(:client_mac) { 'ee-ee-ee-ee-ee' }
     let(:ap_mac) { 'ff-ff-ff-ff-ff' }
@@ -18,14 +8,14 @@ RSpec.describe App do
     let(:ap_meraki_name) { 'hallway-2' }
 
     after do
-      db[:userdetails].truncate
+      DB[:userdetails].truncate
     end
 
     context 'as the Health user' do
       let(:username) { 'HEALTH' }
 
       before do
-        db[:userdetails].insert(username: username, password: 'TestUserPassword')
+        DB[:userdetails].insert(username: username, password: 'TestUserPassword')
         get "/authorize/user/#{username}"
       end
 
@@ -55,12 +45,17 @@ RSpec.describe App do
 
       context 'as a valid user' do
         before do
-          db[:userdetails].insert(username: username, password: 'FooBarBaz')
+          DB[:userdetails].insert(username: username, password: 'FooBarBaz')
           get url
         end
 
         it 'responds with password in the body' do
           expect(last_response.body).to eq('{"control:Cleartext-Password":"FooBarBaz"}')
+        end
+
+        it 'updates the last_login of the user' do
+          user = User.find(username: username)
+          expect(user.last_login).to_not be_nil
         end
       end
 
@@ -78,7 +73,7 @@ RSpec.describe App do
       let(:url) { "/authorize/user/#{username}" }
 
       before do
-        db[:userdetails].insert(username: username, password: 'FooBarBaz')
+        DB[:userdetails].insert(username: username, password: 'FooBarBaz')
 
         200.times do
           get url
