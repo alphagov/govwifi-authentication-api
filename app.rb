@@ -34,8 +34,6 @@ private
 
     return 404 unless user
 
-    user.update(last_login: Time.now) unless user_name == 'HEALTH'
-
     json "control:Cleartext-Password": user.password
   end
 end
