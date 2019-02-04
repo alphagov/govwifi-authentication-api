@@ -26,11 +26,6 @@ describe App do
       it 'responds with password in the body' do
         expect(last_response.body).to eq('{"control:Cleartext-Password":"TestUserPassword"}')
       end
-
-      it 'does not update the last_login' do
-        user = User.find(username: 'HEALTH')
-        expect(user.last_login).to be_nil
-      end
     end
 
     context 'as a non-existent user' do
@@ -56,11 +51,6 @@ describe App do
 
         it 'responds with password in the body' do
           expect(last_response.body).to eq('{"control:Cleartext-Password":"FooBarBaz"}')
-        end
-
-        it 'updates the last_login of the user' do
-          user = User.find(username: username)
-          expect(user.last_login).to_not be_nil
         end
       end
 
