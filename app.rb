@@ -30,20 +30,12 @@ class App < Sinatra::Base
 private
 
   def authorize_user(user_name)
-    user = user_from_db(user_name)
+    user = User.find(username: user_name)
+
     return 404 unless user
 
-    touch_last_login(user)
+    user.update(last_login: Time.now) unless user_name == 'HEALTH'
 
     json "control:Cleartext-Password": user.password
-  end
-
-  def user_from_db(user_name)
-    User.find(username: user_name)
-  end
-
-  def touch_last_login(user)
-    user.last_login = Time.now
-    user.save
   end
 end
