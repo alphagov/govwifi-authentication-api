@@ -2,7 +2,8 @@
 
 This is the user authentication API for GovWifi.
 
-There is also a [private build repository][build-repo] for GovWifi.
+The private GovWifi [build repository][build-repo] contains instructions on how to build GovWifi end-to-end - the sites, services and infrastructure.
+
 
 [build-repo]:https://github.com/alphagov/govwifi-build
 
