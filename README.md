@@ -2,6 +2,10 @@
 
 This is the user authentication API for GovWifi.
 
+There is also a [private build repository][build-repo] for GovWifi.
+
+[build-repo]:https://github.com/alphagov/govwifi-build
+
 ## Overview
 
 GovWifi exposes FreeRADIUS servers on public IP addresses, which are configured
