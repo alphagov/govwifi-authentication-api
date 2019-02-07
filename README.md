@@ -1,9 +1,8 @@
 # GovWifi Authentication API
 
-This is the user authentication API for GovWifi.
+This API is used by the frontend to authenticate GovWifi requests.
 
 The private GovWifi [build repository][build-repo] contains instructions on how to build GovWifi end-to-end - the sites, services and infrastructure.
-
 
 [build-repo]:https://github.com/alphagov/govwifi-build
 
