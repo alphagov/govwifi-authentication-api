@@ -6,8 +6,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: govwifi_test
-    ports:
-      - "13306:3306"
+    expose:
+      - "3306"
 
   app:
     build: .
@@ -19,5 +19,5 @@ services:
       RACK_ENV: development
     links:
       - db
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
