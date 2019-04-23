@@ -5,17 +5,28 @@ ifdef DEPLOYMENT
 endif
 
 DOCKER_COMPOSE = docker-compose -f docker-compose.yml
+
+ifdef ON_CONCOURSE
+  DOCKER_COMPOSE += -f docker-compose.concourse.yml
+endif
+
 ifndef JENKINS_URL
-  DOCKER_COMPOSE += -f docker-compose.development.yml
+  ifndef ON_CONCOURSE
+    DOCKER_COMPOSE += -f docker-compose.development.yml
+  endif
 endif
 
 
 DOCKER_BUILD_CMD = $(DOCKER_COMPOSE) build $(BUNDLE_FLAGS)
 
-
-build:
-	$(MAKE) stop
+build: stop
+ifndef ON_CONCOURSE
 	$(DOCKER_BUILD_CMD)
+endif
+
+prebuild:
+	$(DOCKER_BUILD_CMD)
+	$(DOCKER_COMPOSE) up --no-start
 
 serve:
 	$(MAKE) build
