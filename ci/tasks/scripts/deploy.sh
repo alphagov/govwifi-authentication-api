@@ -11,9 +11,15 @@ function deploy() {
   cluster_name="${deploy_stage}-${CLUSTER_NAME}-cluster"
   service_name="${SERVICE_NAME}-${deploy_stage}"
 
-  ecs_deploy \
+  ecs_deploy_region \
     "${cluster_name}" \
-    "${service_name}"
+    "${service_name}" \
+    "eu-west-1"
+
+  ecs_deploy_region \
+    "${cluster_name}" \
+    "${service_name}" \
+    "eu-west-2"
 }
 
 deploy
