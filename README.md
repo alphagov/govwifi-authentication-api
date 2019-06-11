@@ -41,7 +41,7 @@ The [Makefile][makefile] contains commonly used commands for working with this a
 ### Deploying changes
 
 Merging to `master` will automatically deploy this API to staging.
-To deploy to production, choose _Deploy to production_ in the jenkins pipeline when prompted.
+To deploy to production, choose _Deploy to production_ in the Concourse Pipeline.
 
 ## Gotchas
 
