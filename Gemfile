@@ -11,8 +11,8 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 
 group :test do
-  gem 'govuk-lint'
   gem 'rack-test'
   gem 'rspec'
+  gem 'rubocop-govuk'
   gem 'simplecov', require: false
 end
