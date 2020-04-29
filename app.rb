@@ -1,11 +1,9 @@
-require './lib/loader'
+require "./lib/loader"
 
 class App < Sinatra::Base
   register Sinatra::SensibleLogging
 
-  sensible_logging(
-    logger: Logger.new(STDOUT)
-  )
+  sensible_logging(logger: Logger.new(STDOUT))
 
   configure do
     set :log_level, Logger::DEBUG
@@ -19,12 +17,12 @@ class App < Sinatra::Base
     set :dump_errors, false
   end
 
-  get '/authorize/user/:user_name' do
-    authorize_user(params['user_name'])
+  get "/authorize/user/:user_name" do
+    authorize_user(params["user_name"])
   end
 
-  get '/authorize/user/:user_name/*' do
-    authorize_user(params['user_name'])
+  get "/authorize/user/:user_name/*" do
+    authorize_user(params["user_name"])
   end
 
 private
