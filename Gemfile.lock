@@ -21,7 +21,7 @@ GEM
     multi_json (1.13.1)
     multipart-post (2.0.0)
     mustermann (1.0.3)
-    mysql2 (0.5.1)
+    mysql2 (0.5.3)
     nio4r (2.5.2)
     parallel (1.19.1)
     parser (2.7.1.1)
