@@ -6,7 +6,7 @@ gem "puma"
 gem "require_all"
 gem "sensible_logging", "~> 0.4.1"
 gem "sentry-raven"
-gem "sequel", "~> 5.35"
+gem "sequel", "~> 5.36"
 gem "sinatra"
 gem "sinatra-contrib"
 
