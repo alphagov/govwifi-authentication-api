@@ -3,7 +3,7 @@ require "./lib/loader"
 class App < Sinatra::Base
   register Sinatra::SensibleLogging
 
-  sensible_logging(logger: Logger.new(STDOUT))
+  sensible_logging(logger: Logger.new($stdout))
 
   configure do
     set :log_level, Logger::DEBUG
