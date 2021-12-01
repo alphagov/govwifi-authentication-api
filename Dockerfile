@@ -12,4 +12,4 @@ RUN apk --no-cache add --virtual .build-deps build-base && \
 
 COPY . .
 
-CMD ["bundle", "exec", "puma", "-p", "8080", "--quiet"]
+CMD ["bundle", "exec", "puma", "-p", "8080", "--quiet", "--threads", "8:32"]
