@@ -1,6 +1,3 @@
-#\ --quiet
-# The above is needed to prevent rack from request logging
-
 RACK_ENV = ENV['RACK_ENV'] ||= 'development' unless defined?(RACK_ENV)
 
 if %w[production staging].include?(RACK_ENV)
