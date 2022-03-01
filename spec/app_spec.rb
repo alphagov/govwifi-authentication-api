@@ -15,7 +15,7 @@ describe App do
       let(:username) { "HEALTH" }
 
       before do
-        DB[:userdetails].insert(username: username, password: "TestUserPassword")
+        DB[:userdetails].insert(username:, password: "TestUserPassword")
         get "/authorize/user/#{username}"
       end
 
@@ -45,7 +45,7 @@ describe App do
 
       context "as a valid user" do
         before do
-          DB[:userdetails].insert(username: username, password: "FooBarBaz")
+          DB[:userdetails].insert(username:, password: "FooBarBaz")
           get url
         end
 
@@ -68,7 +68,7 @@ describe App do
       let(:url) { "/authorize/user/#{username}" }
 
       before do
-        DB[:userdetails].insert(username: username, password: "FooBarBaz")
+        DB[:userdetails].insert(username:, password: "FooBarBaz")
 
         200.times do
           get url
