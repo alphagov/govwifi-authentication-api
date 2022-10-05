@@ -8,7 +8,7 @@ params:
   AWS_SECRET_ACCESS_KEY:
 
   # These are set for deploy.sh
-  SERVICE_NAME: "authorisation-api-service"
+  SERVICE_NAME: "authentication-api-service"
   CLUSTER_NAME: "api-cluster"
 
 inputs:

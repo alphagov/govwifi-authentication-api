@@ -9,13 +9,7 @@ function deploy() {
 
   deploy_stage="$(stage_name)"
   cluster_name="${deploy_stage}-${CLUSTER_NAME}"
-
-	if [[ deploy_stage == "staging" ]]
-	then
-		service_name="authentication-api-service-${deploy_stage}"
-	else
-		service_name="${SERVICE_NAME}-${deploy_stage}"
-	fi
+	service_name="${SERVICE_NAME}-${deploy_stage}"
 
   ecs_deploy_region \
     "${cluster_name}" \
