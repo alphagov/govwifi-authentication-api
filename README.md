@@ -1,5 +1,4 @@
 # GovWifi Authentication API
-# TEST #
 
 This API is used by the frontend when a connection request is made to GovWifi.
 Its function is to check these requests against user details and the result determines how FreeRADIUS reacts to it e.g. allow / dissallow the connection.
