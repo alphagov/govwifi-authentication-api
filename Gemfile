@@ -4,7 +4,7 @@ ruby File.read(".ruby-version").chomp
 gem "mysql2"
 gem "puma"
 gem "require_all"
-gem "sensible_logging", "~> 0.4.3"
+gem "sensible_logging", "~> 0.4.7"
 gem "sentry-raven"
 gem "sequel", "~> 5.60"
 gem "sinatra"
