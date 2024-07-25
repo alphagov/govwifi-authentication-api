@@ -16,7 +16,7 @@ services:
       DB_PASS: root
       DB_USER: root
       DB_HOSTNAME: db
-      DEPLOY_ENV: development
+      RACK_ENV: development
     links:
       - db
     expose:

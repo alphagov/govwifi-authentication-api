@@ -2,7 +2,7 @@ require "rack/test"
 require "rspec"
 require "simplecov"
 
-ENV["DEPLOY_ENV"] = "test"
+ENV["RACK_ENV"] = "test"
 
 require File.expand_path "../app.rb", __dir__
 
