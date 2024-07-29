@@ -1,4 +1,4 @@
-DEPLOY_ENV = ENV['DEPLOY_ENV'] ||= 'development' unless defined?(DEPLOY_ENV)
+RACK_ENV = ENV['RACK_ENV'] ||= 'development' unless defined?(RACK_ENV)
 
 if %w[production staging].include?(DEPLOY_ENV)
   require 'raven'
