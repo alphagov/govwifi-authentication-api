@@ -1,6 +1,10 @@
 require "./lib/loader"
 
 class App < Sinatra::Base
+  if ENV.key?("SENTRY_DSN")
+    use Sentry::Rack::CaptureExceptions
+  end
+
   register Sinatra::SensibleLogging
 
   sensible_logging(logger: Logger.new($stdout))

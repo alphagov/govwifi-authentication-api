@@ -1,13 +1,12 @@
 RACK_ENV = ENV['RACK_ENV'] ||= 'development' unless defined?(RACK_ENV)
 
-if %w[production staging].include?(RACK_ENV)
-  require 'raven'
+if ENV.key?("SENTRY_DSN")
+  require "sentry-ruby"
 
-  Raven.configure do |config|
-    config.dsn = ENV['SENTRY_DSN']
+  Sentry.init do |config|
+    config.dsn = ENV["SENTRY_DSN"]
+    config.send_default_pii = true
   end
-
-  use Raven::Rack
 end
 
 require './app'
